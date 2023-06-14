@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class SignupPage implements OnInit {
 
-  current_year: number = new Date().getFullYear();
+  currentYear: number = new Date().getFullYear();
 
-  signup_form: UntypedFormGroup;
-  submit_attempt: boolean = false;
+  signupForm: UntypedFormGroup;
+  submitAttempt: boolean;
 
   constructor(
     private authService: AuthService,
@@ -28,24 +28,24 @@ export class SignupPage implements OnInit {
   ngOnInit() {
 
     // Setup form
-    this.signup_form = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      password_repeat: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      passwordRepeat: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 
   // Sign up
   async signUp() {
 
-    this.submit_attempt = true;
+    this.submitAttempt = true;
 
     // If email or password empty
-    if (this.signup_form.value.email == '' || this.signup_form.value.password == '' || this.signup_form.value.password_repeat == '') {
+    if (this.signupForm.value.email === '' || this.signupForm.value.password === '' || this.signupForm.value.password_repeat === '') {
       this.toastService.presentToast('Error', 'Please fill in all fields', 'top', 'danger', 4000);
 
       // If passwords do not match
-    } else if (this.signup_form.value.password != this.signup_form.value.password_repeat) {
+    } else if (this.signupForm.value.password !== this.signupForm.value.password_repeat) {
       this.toastService.presentToast('Error', 'Passwords must match', 'top', 'danger', 4000);
 
     } else {

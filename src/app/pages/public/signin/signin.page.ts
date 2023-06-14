@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class SigninPage implements OnInit {
 
-  current_year: number = new Date().getFullYear();
+  currentYear: number = new Date().getFullYear();
 
-  signin_form: UntypedFormGroup;
-  submit_attempt: boolean = false;
+  signinForm: UntypedFormGroup;
+  submitAttempt: boolean;
 
   constructor(
     private authService: AuthService,
@@ -28,23 +28,23 @@ export class SigninPage implements OnInit {
   ngOnInit() {
 
     // Setup form
-    this.signin_form = this.formBuilder.group({
+    this.signinForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
 
     // DEBUG: Prefill inputs
-    this.signin_form.get('email').setValue('john.doe@mail.com');
-    this.signin_form.get('password').setValue('123456');
+    this.signinForm.get('email').setValue('john.doe@mail.com');
+    this.signinForm.get('password').setValue('123456');
   }
 
   // Sign in
   async signIn() {
 
-    this.submit_attempt = true;
+    this.submitAttempt = true;
 
     // If email or password empty
-    if (this.signin_form.value.email == '' || this.signin_form.value.password == '') {
+    if (this.signinForm.value.email === '' || this.signinForm.value.password === '') {
       this.toastService.presentToast('Error', 'Please input email and password', 'top', 'danger', 2000);
 
     } else {
@@ -70,5 +70,4 @@ export class SigninPage implements OnInit {
 
     }
   }
-
 }
