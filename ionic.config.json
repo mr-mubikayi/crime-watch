@@ -1,0 +1,7 @@
+{
+  "name": "crime-watch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
