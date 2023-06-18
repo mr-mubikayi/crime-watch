@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
@@ -5,6 +6,8 @@ import { Location } from '../../../models/interfaces/location';
 import { Locations } from '../../../models/interfaces/locations';
 import { Marker } from '../../../models/interfaces/marker';
 import { DataService } from 'src/app/services/data/data.service';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { InsightsPage } from '../insights/insights.page';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +35,10 @@ export class HomePage implements OnInit, OnDestroy {
   private ids: Array<string> = [];
 
   constructor(
-    private dataService: DataService) {
+    private dataService: DataService,
+    private routerOutlet: IonRouterOutlet,
+    private modalController: ModalController) {
+
     this.locations = dataService.locations;
     this.heading      = 'Select a country from the above menu';
     this.description  = 'Interact with the markers that are displayed for each selected country';
@@ -111,6 +117,7 @@ export class HomePage implements OnInit, OnDestroy {
   private manageMarker(event: any): void {
     const summary = this.markers.filter((item: any) => {
       if (item.markerId === event.markerId) {
+        console.log(item);
         return item;
       }
     });
@@ -118,6 +125,7 @@ export class HomePage implements OnInit, OnDestroy {
     // Render to component view
     this.heading = summary[0].title;
     this.description = summary[0].snippet;
+    this.filter(summary[0].title);
   }
 
   private generateMarkers(locations: Array<Locations>): Array<any> {
@@ -136,5 +144,24 @@ export class HomePage implements OnInit, OnDestroy {
     this.map.removeMarkers(markers);
     this.ids      = [];
     this.markers  = [];
+  }
+
+  async filter(name: string) {
+
+    const modal = await this.modalController.create({
+      component: InsightsPage,
+      componentProps: {
+        areaName: name
+      },
+      presentingElement: this.routerOutlet.nativeEl
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data) {
+
+    }
   }
 }

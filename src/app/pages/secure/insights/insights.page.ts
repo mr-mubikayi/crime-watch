@@ -1,3 +1,11 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-bitwise */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable no-var */
+/* eslint-disable object-shorthand */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -10,7 +18,9 @@ import { HelperService } from 'src/app/services/helper/helper.service';
 })
 export class InsightsPage implements OnInit {
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined
+  areaName: string;
+
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public bar_chart_option: ChartConfiguration['options'] = {
     font: {
