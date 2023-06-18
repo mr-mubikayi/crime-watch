@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class SigninPage implements OnInit {
 
   currentYear: number = new Date().getFullYear();
-
   signinForm: UntypedFormGroup;
   submitAttempt: boolean;
 

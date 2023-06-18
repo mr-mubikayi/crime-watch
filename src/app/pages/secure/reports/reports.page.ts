@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
-import { FilterPage } from './filter/filter.page';
+import { FilterPage } from '../payments/filter/filter.page';
 
 @Component({
-  selector: 'app-payments',
-  templateUrl: './payments.page.html',
-  styleUrls: ['./payments.page.scss'],
+  selector: 'app-reports',
+  templateUrl: './reports.page.html',
+  styleUrls: ['./reports.page.scss'],
 })
-export class PaymentsPage implements OnInit {
+export class ReportsPage implements OnInit {
 
-  content_loaded = false;
+  contentLoaded = false;
 
   constructor(
     private routerOutlet: IonRouterOutlet,
@@ -18,17 +17,13 @@ export class PaymentsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    // Fake timeout
-    setTimeout(() => {
-      this.content_loaded = true;
+     setTimeout(() => {
+      this.contentLoaded = true;
     }, 2000);
   }
 
   // Filter
   async filter() {
-
-    // Open filter modal
     const modal = await this.modalController.create({
       component: FilterPage,
       presentingElement: this.routerOutlet.nativeEl
@@ -36,19 +31,14 @@ export class PaymentsPage implements OnInit {
 
     await modal.present();
 
-    // Apply filter from modal
     const { data } = await modal.onWillDismiss();
 
     if (data) {
 
-      // Reload
-      this.content_loaded = false;
-
-      // Fake timeout
+      this.contentLoaded = false;
       setTimeout(() => {
-        this.content_loaded = true;
+        this.contentLoaded = true;
       }, 2000);
     }
   }
-
 }

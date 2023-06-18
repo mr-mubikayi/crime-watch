@@ -25,6 +25,14 @@ const routes: Routes = [
         loadChildren: () => import('../pages/secure/payments/payments.module').then(m => m.PaymentsPageModule)
       },
       {
+        path: 'reports',
+        loadChildren: () => import('../pages/secure/reports/reports.module').then(m => m.ReportsPageModule)
+      },
+      {
+        path: 'report',
+        loadChildren: () => import('../pages/secure/report/report.module').then(m => m.ReportPageModule)
+      },
+      {
         path: 'cards',
         loadChildren: () => import('../pages/secure/cards/cards.module').then(m => m.CardsPageModule)
       },

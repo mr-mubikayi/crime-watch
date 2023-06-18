@@ -1,0 +1,33 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar>
+    <ion-title>report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">New Report</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="ion-padding ion-full-height">
+    <form class="form-default" [formGroup]="reportForm" (submit)="onSendClicked()">
+      <ion-list class="item-card-list" lines="none">
+        <ion-item>
+          <ion-select label="Crime type" interface="popover" placeholder="Select a crime type" (ionChange)="onTypeSelected($event)">
+            <ion-select-option *ngFor="let crimeType of crimeTypes" [value]="crimeType">{{ crimeType }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="ion-margin-top-small">
+          <ion-label color="tertiary" position="stacked">Description</ion-label>
+          <ion-textarea formControlName="description" type="text" autoGrow="true" rows="15" placeholder="Describe what happened"></ion-textarea>
+        </ion-item>
+      </ion-list>
+
+      <ion-button class="ion-margin-top" type="submit" expand="block" color="primary">
+        Send
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -9,8 +11,9 @@ import { ActionSheetController } from '@ionic/angular';
 export class TabsPage {
 
   constructor(
-    private actionSheetController: ActionSheetController
-  ) {}
+    private actionSheetController: ActionSheetController,
+    private authService: AuthService,
+    private router: Router) {}
 
   // Select action
   async selectAction() {
@@ -20,26 +23,20 @@ export class TabsPage {
       cssClass: 'custom-action-sheet',
       buttons: [
         {
-          text: 'Add account',
-          icon: 'wallet',
+          text: 'New Report',
+          icon: 'add-circle-outline',
           handler: () => {
-            // Put in logic ...
+            this.router.navigate(['/report']);
           }
         },
         {
-          text: 'Add transaction',
-          icon: 'swap-horizontal-outline',
+          text: 'SOS',
+          icon: 'alert-circle-outline',
           handler: () => {
-            // Put in logic ...
+
           }
         },
         {
-          text: 'Set budget',
-          icon: 'calculator',
-          handler: () => {
-            // Put in logic ...
-          }
-        }, {
           text: 'Cancel',
           icon: 'close',
           role: 'cancel'

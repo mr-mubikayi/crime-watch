@@ -40,7 +40,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
   }
 
   ngOnDestroy(): void {

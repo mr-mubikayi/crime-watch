@@ -1,8 +1,6 @@
 <ion-header collapse="fade" [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title>Home</ion-title>
     <ion-buttons slot="primary">
       <ion-button routerLink="/settings">
         <ion-icon slot="icon-only" name="cog"></ion-icon>
@@ -24,7 +22,7 @@
   <div class="ion-padding">
     <ion-list class="list-custom" lines="full">
       <ion-item>
-        <ion-select label="Free State" interface="popover" placeholder="Select a city" cancelText="Cancel" (ionChange)="selected($event)">
+        <ion-select label="Free State" interface="popover" placeholder="Select a city" (ionChange)="selected($event)">
           <ion-select-option *ngFor="let location of locations" [value]="location.country">{{ location.country }}</ion-select-option>
         </ion-select>
       </ion-item>

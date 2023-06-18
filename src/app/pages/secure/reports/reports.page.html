@@ -1,7 +1,7 @@
 <ion-header collapse="fade" [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Payments
+      Reports
     </ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="filter()">
@@ -14,7 +14,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Payments</ion-title>
+      <ion-title size="large">Reports</ion-title>
     </ion-toolbar>
     <ion-toolbar>
       <ion-searchbar showCancelButton="focus" placeholder="Report Name ..."></ion-searchbar>
@@ -24,7 +24,7 @@
   <div class="ion-padding">
 
     <!-- Skeletons -->
-    <ng-container *ngIf="!content_loaded">
+    <ng-container *ngIf="!contentLoaded">
 
       <ion-list-header class="ion-list-header-small">
         <ion-label><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></ion-label>
@@ -47,7 +47,7 @@
 
     </ng-container>
 
-    <ng-container *ngIf="content_loaded">
+    <ng-container *ngIf="contentLoaded">
 
       <ion-list-header class="ion-list-header-small">
         <ion-label>June, 2022</ion-label>
@@ -153,9 +153,6 @@
           <ion-badge color="medium" mode="ios" slot="end">$8412.48</ion-badge>
         </ion-item>
       </ion-list>
-
     </ng-container>
-
   </div>
-
 </ion-content>

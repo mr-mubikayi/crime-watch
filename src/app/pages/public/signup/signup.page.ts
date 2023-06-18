@@ -23,13 +23,13 @@ export class SignupPage implements OnInit {
     private loadingController: LoadingController,
     private formBuilder: UntypedFormBuilder,
     private toastService: ToastService,
-    private router: Router
-  ) { }
+    private router: Router) { }
 
   ngOnInit() {
 
     this.signupForm = this.formBuilder.group({
       email: ['orpamubi30@gmail.com', Validators.compose([Validators.email, Validators.required])],
+      userName: ['Orpa', Validators.required],
       password: ['123456', Validators.compose([Validators.minLength(6), Validators.required])],
       passwordRepeat: ['123456', Validators.compose([Validators.minLength(6), Validators.required])]
     });
@@ -59,26 +59,41 @@ export class SignupPage implements OnInit {
 
       await loading.present();
 
+      //Register user
       this.authService
         .registerUser(this.signupForm.value.email, this.signupForm.value.password)
-        .then(() => {
-          this.authService.sendVerificationMail()
-          .then(() => {
-            this.toastService.presentToast('Success', 'Verification email sent successfully, please check your email', 'top', 'success', 4000);
-            this.router.navigate(['/verify-email']);
-            loading.dismiss();
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const userName = this.signupForm.value.userName;
+
+          //Set user name
+          user.updateProfile({
+            displayName: userName
+          }).then(() => {
+
+            //Send verification email
+            this.authService.sendVerificationMail()
+            .then(() => {
+              this.toastService.presentToast('Success', 'Verification email sent successfully, please check your email', 'top', 'success', 4000);
+              this.router.navigate(['/verify-email']);
+              loading.dismiss();
+            })
+            .catch(async (error) => {
+              switch(error.code){
+                case 'auth/too-many-requests':
+                  this.toastService.presentToast('Error', 'Error sending verification email, please try again in few minutes', 'top', 'danger', 4000);
+                  loading.dismiss();
+                break;
+                default:
+                  this.toastService.presentToast('Error', `${error.code} ${error.message}`, 'top', 'danger', 4000);
+                  loading.dismiss();
+                break;
+              }
+            });
           })
           .catch(async (error) => {
-            switch(error.code){
-              case 'auth/too-many-requests':
-                this.toastService.presentToast('Error', 'Error sending verification email, please try again in few minutes', 'top', 'danger', 4000);
-                loading.dismiss();
-              break;
-              default:
-                this.toastService.presentToast('Error', `${error.code} ${error.message}`, 'top', 'danger', 4000);
-                loading.dismiss();
-              break;
-            }
+            this.toastService.presentToast('Error', `${error.code} ${error.message}`, 'top', 'danger', 4000);
+            loading.dismiss();
           });
         })
         .catch(async (error) => {
