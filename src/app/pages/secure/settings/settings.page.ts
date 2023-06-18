@@ -10,10 +10,18 @@ import { ToastService } from 'src/app/services/toast/toast.service';
 })
 export class SettingsPage implements OnInit {
 
+  userName: string;
+  emailAddress: string;
+
   constructor(
     private authService: AuthService,
     private loadingController: LoadingController,
-    private toastService: ToastService) { }
+    private toastService: ToastService) {
+
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.userName = user.displayName;
+      this.emailAddress = user.email;
+    }
 
   ngOnInit() {
   }
