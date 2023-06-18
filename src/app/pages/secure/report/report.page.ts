@@ -67,8 +67,8 @@ export class ReportPage implements OnInit {
         longitude: 26.2039,
         type: this.selectedType,
         description: this.reportForm.value.description,
-        status: 1,
-        severity: 1
+        status: 0,
+        severity: 0
       };
 
       this.reportService.createReport(report)

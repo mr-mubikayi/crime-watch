@@ -33,8 +33,8 @@ const routes: Routes = [
         loadChildren: () => import('../pages/secure/report/report.module').then(m => m.ReportPageModule)
       },
       {
-        path: 'cards',
-        loadChildren: () => import('../pages/secure/cards/cards.module').then(m => m.CardsPageModule)
+        path: 'settings',
+        loadChildren: () => import('../pages/secure/settings/settings.module').then(m => m.SettingsPageModule)
       },
     ]
   }

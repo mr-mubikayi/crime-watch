@@ -22,135 +22,21 @@
   </ion-header>
 
   <div class="ion-padding">
-
-    <!-- Skeletons -->
-    <ng-container *ngIf="!contentLoaded">
-
+    <ng-container *ngFor="let reportGroup of reportService.reportsGroupedByDate">
       <ion-list-header class="ion-list-header-small">
-        <ion-label><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></ion-label>
-        <ion-note color="tertiary" class="ion-note-small">
-          <ion-skeleton-text animated style="width: 40px"></ion-skeleton-text>
-        </ion-note>
+        <ion-label>{{ reportGroup.date | date:'MMMM, yyyy'}}</ion-label>
       </ion-list-header>
       <ion-list class="list-custom animate__animated animate__fadeIn" lines="full">
-        <ion-item button detail="false" *ngFor="let i of [].constructor(12);">
+        <ion-item button detail="false" routerLink="detail" *ngFor="let report of reportGroup.reports">
           <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-icon *ngIf="report.severity === 0" name="reader-outline"></ion-icon>
+            <ion-icon *ngIf="report.severity === 1" name="alert-circle-outline" class="sos-icon"></ion-icon>
           </ion-avatar>
           <ion-label>
-            <h3><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></h3>
-            <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+            <h3>{{ report.type }}</h3>
+            <p>{{ report.date | date:'MMMM dd, yyyy' }} - {{ report.time }}</p>
           </ion-label>
-          <ion-skeleton-text slot="end" animated style="width: 15%"></ion-skeleton-text>
-        </ion-item>
-      </ion-list>
-
-    </ng-container>
-
-    <ng-container *ngIf="contentLoaded">
-
-      <ion-list-header class="ion-list-header-small">
-        <ion-label>June, 2022</ion-label>
-        <ion-note color="tertiary" class="ion-note-small">$3,321</ion-note>
-      </ion-list-header>
-      <ion-list class="list-custom animate__animated animate__fadeIn" lines="full">
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="cafe"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Coffee</h3>
-            <p>Starbucks</p>
-          </ion-label>
-          <ion-badge color="danger" mode="ios" slot="end">- $8.60</ion-badge>
-        </ion-item>
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="business"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Salary</h3>
-            <p>Apple Inc.</p>
-          </ion-label>
-          <ion-badge color="medium" mode="ios" slot="end">$8412.48</ion-badge>
-        </ion-item>
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="home"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Rent</h3>
-            <p>Housing Inc.</p>
-          </ion-label>
-          <ion-badge color="danger" mode="ios" slot="end">- $1400.00</ion-badge>
-        </ion-item>
-      </ion-list>
-
-      <hr class="hr-medium">
-
-      <ion-list-header class="ion-list-header-small">
-        <ion-label>May, 2022</ion-label>
-        <ion-note color="tertiary" class="ion-note-small">- $105,91</ion-note>
-      </ion-list-header>
-      <ion-list class="list-custom animate__animated animate__fadeIn" lines="full">
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="school"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Student loan</h3>
-            <p>Student Loans Company</p>
-          </ion-label>
-          <ion-badge color="danger" mode="ios" slot="end">- $680.60</ion-badge>
-        </ion-item>
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="car"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Car loan</h3>
-            <p>Car Company Inc.</p>
-          </ion-label>
-          <ion-badge color="danger" mode="ios" slot="end">- $230.00</ion-badge>
-        </ion-item>
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="business"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Salary</h3>
-            <p>Apple Inc.</p>
-          </ion-label>
-          <ion-badge color="medium" mode="ios" slot="end">$8412.48</ion-badge>
-        </ion-item>
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="logo-amazon"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Samsung TV</h3>
-            <p>Amazon</p>
-          </ion-label>
-          <ion-badge color="danger" mode="ios" slot="end">- $1230.00</ion-badge>
-        </ion-item>
-      </ion-list>
-
-      <hr class="hr-medium">
-
-      <ion-list-header class="ion-list-header-small">
-        <ion-label>April, 2022</ion-label>
-        <ion-note color="tertiary" class="ion-note-small">$8412,48</ion-note>
-      </ion-list-header>
-      <ion-list class="list-custom animate__animated animate__fadeIn" lines="full">
-        <ion-item button detail="false" routerLink="detail">
-          <ion-avatar slot="start" class="ion-avatar-default-icon">
-            <ion-icon name="business"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h3>Salary</h3>
-            <p>Apple Inc.</p>
-          </ion-label>
-          <ion-badge color="medium" mode="ios" slot="end">$8412.48</ion-badge>
+          <ion-badge [color]="getStatusColor(report.status)" mode="ios" slot="end">{{ getStatusName(report.status) }}</ion-badge>
         </ion-item>
       </ion-list>
     </ng-container>

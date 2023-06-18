@@ -1,6 +1,6 @@
 export enum ReportStatus {
+  pending,
   progress,
   resolved,
-  pending,
-  closed
+  suspended
 }
