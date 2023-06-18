@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-back-button text="Sign in" defaultHref="/signin" (click)="onGoToPageClicked('/signin')"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding ion-full-height ion-flex ion-flex-center">
+    <div class="logo-container">
+      <h1 class="logo-placeholder">CrimeWatch</h1>
+      <p>Verify email</p>
+    </div>
+    <br>
+    <p>
+      Please check your email and click on the link to verfiy your email address.
+    </p>
+    <br>
+    <br>
+    <ion-button type="submit" (click)="onResendClicked()" expand="block">
+      Resend Verification Email
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -18,7 +19,7 @@ export class SigninPage implements OnInit {
   submitAttempt: boolean;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private loadingController: LoadingController,
     private formBuilder: UntypedFormBuilder,
     private toastService: ToastService,
@@ -27,18 +28,12 @@ export class SigninPage implements OnInit {
 
   ngOnInit() {
 
-    // Setup form
     this.signinForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.email, Validators.required])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      email: ['orpamubi30@gmail.com', Validators.compose([Validators.email, Validators.required])],
+      password: ['123456', Validators.compose([Validators.minLength(6), Validators.required])]
     });
-
-    // DEBUG: Prefill inputs
-    this.signinForm.get('email').setValue('john.doe@mail.com');
-    this.signinForm.get('password').setValue('123456');
   }
 
-  // Sign in
   async signIn() {
 
     this.submitAttempt = true;
@@ -48,26 +43,51 @@ export class SigninPage implements OnInit {
       this.toastService.presentToast('Error', 'Please input email and password', 'top', 'danger', 2000);
 
     } else {
-
-      // Proceed with loading overlay
       const loading = await this.loadingController.create({
         cssClass: 'default-loading',
-        message: '<p>Signing in...</p><span>Please be patient.</span>',
+        message: 'Signing in...',
         spinner: 'crescent'
       });
+
       await loading.present();
 
-      // TODO: Add your sign in logic
-      // ...
-
-      // Fake timeout
-      setTimeout(async () => {
-
-        // Sign in success
-        await this.router.navigate(['/home']);
-        loading.dismiss();
-      }, 2000);
-
+      this.authService
+        .signIn(this.signinForm.value.email, this.signinForm.value.password)
+        .then((): any => {
+          if (this.authService.isEmailVerified) {
+            this.router.navigate(['/home']);
+            loading.dismiss();
+          } else {
+            this.toastService.presentToast('Verification', 'Email is not verified, please check your email box', 'top', 'medium', 4000);
+            loading.dismiss();
+            return false;
+          }
+        })
+        .catch((error) => {
+          switch(error.code){
+            case 'auth/user-not-found':
+              this.toastService.presentToast('Error', 'There is no user record corresponding to this identifier', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            case 'auth/invalid-email':
+              this.toastService.presentToast('Error', 'Email format is incorect, please change.', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            case 'auth/wrong-password':
+              this.toastService.presentToast('Error', 'Password is invalid, please change.', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            case 'auth/too-many-requests':
+              this.toastService.presentToast('Error', 'Error signing in, please try again in few minutes', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            default:
+              this.toastService.presentToast('Error', `${error.message}`, 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+          }
+        }
+      );
     }
   }
 }

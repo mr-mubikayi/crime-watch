@@ -7,9 +7,7 @@
 </ion-header>
 
 <ion-content>
-
   <div class="ion-padding ion-full-height ion-flex ion-flex-center">
-
     <div class="logo-container">
       <h1 class="logo-placeholder">crime-watch</h1>
       <p>Create a free account.</p>
@@ -18,7 +16,6 @@
     <form class="form-default" [formGroup]="signupForm" (submit)="signUp()">
 
       <ion-list class="item-card-list" lines="none">
-
         <ion-item>
           <ion-label color="tertiary" position="stacked">Email</ion-label>
           <ion-input formControlName="email" type="email" autocomplete="off"
@@ -32,9 +29,8 @@
 
         <ion-item class="ion-margin-top-small">
           <ion-label color="tertiary" position="stacked">Password repeat</ion-label>
-          <ion-input formControlName="password_repeat" type="password" placeholder="Password repeat"></ion-input>
+          <ion-input formControlName="passwordRepeat" type="password" placeholder="Password repeat"></ion-input>
         </ion-item>
-
       </ion-list>
 
       <ion-button class="ion-margin-top" type="submit" expand="block" color="primary">
@@ -47,7 +43,5 @@
         <small>&copy; {{currentYear}} crime-watch</small>
       </ion-text>
     </div>
-
   </div>
-
 </ion-content>

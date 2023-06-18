@@ -33,7 +33,11 @@ const routes: Routes = [
     path: 'password-reset',
     loadChildren: () => import('./pages/public/password-reset/password-reset.module').then( m => m.PasswordResetPageModule),
     // canActivate: [PublicGuard] // Prevent for signed in users
+  },  {
+    path: 'verify-email',
+    loadChildren: () => import('./pages/public/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   },
+
 ];
 @NgModule({
   imports: [

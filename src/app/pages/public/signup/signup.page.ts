@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -27,46 +28,85 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
 
-    // Setup form
     this.signupForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.email, Validators.required])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      passwordRepeat: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      email: ['orpamubi30@gmail.com', Validators.compose([Validators.email, Validators.required])],
+      password: ['123456', Validators.compose([Validators.minLength(6), Validators.required])],
+      passwordRepeat: ['123456', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 
-  // Sign up
   async signUp() {
 
     this.submitAttempt = true;
 
     // If email or password empty
-    if (this.signupForm.value.email === '' || this.signupForm.value.password === '' || this.signupForm.value.password_repeat === '') {
-      this.toastService.presentToast('Error', 'Please fill in all fields', 'top', 'danger', 4000);
+    if(this.signupForm.value.email === '' ||
+       this.signupForm.value.password === '' ||
+       this.signupForm.value.passwordRepeat === '') {
+
+        this.toastService.presentToast('Error', 'Please fill in all fields', 'top', 'danger', 4000);
 
       // If passwords do not match
-    } else if (this.signupForm.value.password !== this.signupForm.value.password_repeat) {
-      this.toastService.presentToast('Error', 'Passwords must match', 'top', 'danger', 4000);
+    } else if(this.signupForm.value.password !== this.signupForm.value.passwordRepeat) {
+      this.toastService.presentToast('Error', 'Passwords entered do not match', 'top', 'danger', 4000);
 
-    } else {
-
-      // Proceed with loading overlay
+    } else{
       const loading = await this.loadingController.create({
         cssClass: 'default-loading',
-        message: '<p>Signing up...</p><span>Please be patient.</span>',
+        message: 'Signing up...',
         spinner: 'crescent'
       });
+
       await loading.present();
 
-      // TODO: Add your sign up logic
-      // ...
-
-      // Success messages + routing
-      this.toastService.presentToast('Welcome!', 'Lorem ipsum', 'top', 'success', 2000);
-      await this.router.navigate(['/home']);
-      loading.dismiss();
+      this.authService
+        .registerUser(this.signupForm.value.email, this.signupForm.value.password)
+        .then(() => {
+          this.authService.sendVerificationMail()
+          .then(() => {
+            this.toastService.presentToast('Success', 'Verification email sent successfully, please check your email', 'top', 'success', 4000);
+            this.router.navigate(['/verify-email']);
+            loading.dismiss();
+          })
+          .catch(async (error) => {
+            switch(error.code){
+              case 'auth/too-many-requests':
+                this.toastService.presentToast('Error', 'Error sending verification email, please try again in few minutes', 'top', 'danger', 4000);
+                loading.dismiss();
+              break;
+              default:
+                this.toastService.presentToast('Error', `${error.code} ${error.message}`, 'top', 'danger', 4000);
+                loading.dismiss();
+              break;
+            }
+          });
+        })
+        .catch(async (error) => {
+          switch(error.code){
+            case 'auth/email-already-in-use':
+              this.toastService.presentToast('Error', 'User already exist, please proceed to sign in.', 'top', 'medium', 4000);
+              this.router.navigate(['/signin']);
+              loading.dismiss();
+            break;
+            case 'auth/invalid-email':
+              this.toastService.presentToast('Error', 'Email format is incorect, please change.', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            case 'auth/weak-password':
+              this.toastService.presentToast('Error', 'Password should be at least 6 characters.', 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+            case 'auth/too-many-requests':
+                this.toastService.presentToast('Error', 'Error signing up, please try again in few minutes', 'top', 'danger', 4000);
+                loading.dismiss();
+              break;
+            default:
+              this.toastService.presentToast('Error', `${error.message}`, 'top', 'danger', 4000);
+              loading.dismiss();
+            break;
+          }
+        }
+      );
     }
-
   }
-
 }

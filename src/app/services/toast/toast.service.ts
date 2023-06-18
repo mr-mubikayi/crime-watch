@@ -28,12 +28,12 @@ export class ToastService {
     }
 
     const toast = await this.toastController.create({
-      header: header,
-      message: message,
-      duration: duration,
-      position: position,
-      color: color,
-      icon: icon
+      header,
+      message,
+      duration,
+      position,
+      color,
+      icon
     });
     await toast.present();
   }

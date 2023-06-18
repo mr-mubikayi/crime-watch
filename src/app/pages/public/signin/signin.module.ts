@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SigninPageRoutingModule } from './signin-routing.module';
 import { SigninPage } from './signin.page';
-//Firebase
 import { AngularFireAuthModule } from '@angular/fire/compat/auth/';
 
 @NgModule({
