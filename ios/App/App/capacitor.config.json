@@ -1,9 +1,0 @@
-{
-	"appId": "io.ionic.starter",
-	"appName": "crime-watch",
-	"webDir": "www",
-	"bundledWebRuntime": false,
-	"ios": {
-		"scheme": "crime-watch"
-	}
-}
