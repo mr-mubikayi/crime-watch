@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/crime-watch",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
