@@ -1,4 +1,5 @@
 export class Report {
+  id: string;
   user: string;
   date: string;
   time: string;

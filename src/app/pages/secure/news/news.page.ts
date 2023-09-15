@@ -11,7 +11,7 @@ import { NewsService } from 'src/app/services/news/news.service';
 export class NewsPage implements OnInit {
 
   content_loaded = false;
-  skeletonItems = new Array(20);
+  skeletonItems = new Array(3);
   articles: Article[];
 
   constructor(

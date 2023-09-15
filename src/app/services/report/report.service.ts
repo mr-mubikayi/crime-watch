@@ -8,6 +8,7 @@ import { Report } from '../../models/report';
 export class ReportService {
 
   public reportsGroupedByDate: any;
+  public selectedReport: any;
 
   constructor(
     private firestore: AngularFirestore) {
@@ -19,6 +20,7 @@ export class ReportService {
     .snapshotChanges()
     .subscribe(result => {
       const reports = result.map(e => ({
+        id: e.payload.doc.data()['id'],
         user: e.payload.doc.data()['user'],
         date: e.payload.doc.data()['date'],
         time: e.payload.doc.data()['time'],

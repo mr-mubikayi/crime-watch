@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { Report } from 'src/app/models/report';
 import { ReportService } from 'src/app/services/report/report.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-report',
@@ -61,6 +62,7 @@ export class ReportPage implements OnInit {
       const userName = this.reportForm.value.anonymous ? null : user.displayName;
       const date = new Date();
       const report: Report = {
+        id: Guid.create().toString(),
         user: userName,
         date: date.toLocaleDateString(),
         time: date.toLocaleTimeString(),

@@ -27,7 +27,6 @@ export class NewsDetailsPage implements OnInit {
   ) {
     if(this.newsService.selectedArticle != null){
       this.article = this.newsService.selectedArticle;
-      console.log(this.article);
     }
     else{
       this.navController.navigateForward('news');
@@ -41,7 +40,9 @@ export class NewsDetailsPage implements OnInit {
   ionViewDidEnter() {
     if(this.newsService.selectedArticle != null){
       this.article = this.newsService.selectedArticle;
-      console.log(this.article);
+    }
+    else{
+      this.navController.navigateForward('news');
     }
   }
 }

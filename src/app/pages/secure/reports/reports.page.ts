@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, LoadingController, ModalController } from '@ionic/angular';
@@ -16,13 +17,14 @@ import { ReportStatus } from 'src/app/models/enums/report-status';
 })
 export class ReportsPage implements OnInit {
 
-  skeletonItems = new Array(20);
+  skeletonItems = new Array(3);
   content_loaded: boolean = false;
   reports: any;
 
   constructor(
     private routerOutlet: IonRouterOutlet,
     private modalController: ModalController,
+    private navController: NavController,
     public authService: AuthService,
     private loadingController: LoadingController,
     private formBuilder: UntypedFormBuilder,
@@ -63,6 +65,11 @@ export class ReportsPage implements OnInit {
 
   getStatusName(status: number): string{
     return ReportStatus[status];
+  }
+
+  goToReportDetails(report: any){
+    this.reportService.selectedReport = report;
+    this.navController.navigateForward('reports/detail', { state: report });
   }
 
   // Filter

@@ -6,6 +6,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { ToastService } from '../services/toast/toast.service';
 import { ReportService } from '../services/report/report.service';
 import { Report } from 'src/app/models/report';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-tabs',
@@ -81,6 +82,7 @@ export class TabsPage {
     const userName = isAnonymous ? null : user.displayName;
     const date = new Date();
     const report: Report = {
+      id: Guid.create().toString(),
       user: userName,
       date: date.toLocaleDateString(),
       time: date.toLocaleTimeString(),

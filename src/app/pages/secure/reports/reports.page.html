@@ -29,17 +29,19 @@
           <ion-label>{{ reportGroup.date | date:'MMMM, yyyy'}}</ion-label>
         </ion-list-header>
         <ion-list class="list-custom animate__animated animate__fadeIn" lines="full">
-          <ion-item button detail="false" routerLink="detail" *ngFor="let report of reportGroup.reports">
-            <ion-avatar slot="start" class="ion-avatar-default-icon">
-              <ion-icon *ngIf="report.severity === 0" name="reader-outline"></ion-icon>
-              <ion-icon *ngIf="report.severity === 1" name="alert-circle-outline" class="sos-icon"></ion-icon>
-            </ion-avatar>
-            <ion-label>
-              <h3>{{ report.type }}</h3>
-              <p>{{ report.date | date:'MMMM dd, yyyy' }} - {{ report.time }}</p>
-            </ion-label>
-            <ion-badge [color]="getStatusColor(report.status)" mode="ios" slot="end">{{ getStatusName(report.status) }}</ion-badge>
-          </ion-item>
+          <ng-container *ngFor="let report of reportGroup.reports">
+            <ion-item detail="false" (click)="goToReportDetails(report)">
+              <ion-avatar slot="start" class="ion-avatar-default-icon">
+                <ion-icon *ngIf="report.severity === 0" name="reader-outline"></ion-icon>
+                <ion-icon *ngIf="report.severity === 1" name="alert-circle-outline" class="sos-icon"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h3>{{ report.type }}</h3>
+                <p>{{ report.date | date:'MMMM dd, yyyy' }} - {{ report.time }}</p>
+              </ion-label>
+              <ion-badge [color]="getStatusColor(report.status)" mode="ios" slot="end">{{ getStatusName(report.status) }}</ion-badge>
+            </ion-item>
+          </ng-container>
         </ion-list>
       </ng-container>
     </ng-container>
@@ -47,7 +49,7 @@
     <!-- Skeletons -->
     <ng-container *ngIf="!content_loaded" class="skeletons-container">
       <ng-container *ngFor="let _ of skeletonItems; let i = index">
-        <ion-item button detail="false" routerLink="detail">
+        <ion-item detail="false">
           <ion-avatar slot="start" class="ion-avatar-default-icon">
             <ion-skeleton-text animated style="width: 30px; height: 30px;"></ion-skeleton-text>
           </ion-avatar>
