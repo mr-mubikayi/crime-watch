@@ -29,11 +29,19 @@ const routes: Routes = [
   {
     path: 'reports',
     loadChildren: () => import('./reports/reports.module').then( m => m.ReportsPageModule)
-  },  {
+  },
+  {
     path: 'report',
     loadChildren: () => import('./report/report.module').then( m => m.ReportPageModule)
+  },
+  {
+    path: 'news',
+    loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
+  },
+  {
+    path: 'news/details',
+    loadChildren: () => import('./news/news-details/news-details.module').then( m => m.NewsDetailsPageModule)
   }
-
 ];
 
 @NgModule({

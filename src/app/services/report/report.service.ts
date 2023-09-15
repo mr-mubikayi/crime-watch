@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Report } from '../../models/report';
@@ -51,7 +50,7 @@ export class ReportService {
         groupedReports.push(newGroup);
       }
     });
-    groupedReports.sort((a, b) => a.date.getTime() - b.date.getTime());
+    groupedReports.sort((a, b) => b.date.getTime() - a.date.getTime());
     return groupedReports;
   }
 

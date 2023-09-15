@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable prefer-const */
 /* eslint-disable no-bitwise */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
@@ -9,6 +10,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { Article } from 'src/app/models/interfaces/article';
 import { HelperService } from 'src/app/services/helper/helper.service';
 
 @Component({
@@ -17,6 +19,8 @@ import { HelperService } from 'src/app/services/helper/helper.service';
   styleUrls: ['./insights.page.scss'],
 })
 export class InsightsPage implements OnInit {
+
+  articles: Article[];
 
   areaName: string;
 
@@ -112,8 +116,8 @@ export class InsightsPage implements OnInit {
   content_loaded: boolean = false;
 
   constructor(
-    private helperService: HelperService
-  ) { }
+    private helperService: HelperService) {
+  }
 
   ngOnInit() {
 
@@ -165,5 +169,4 @@ export class InsightsPage implements OnInit {
       }
     ];
   }
-
 }

@@ -28,8 +28,8 @@ export class SigninPage implements OnInit {
   ngOnInit() {
 
     this.signinForm = this.formBuilder.group({
-      email: ['orpamubi30@gmail.com', Validators.compose([Validators.email, Validators.required])],
-      password: ['123456', Validators.compose([Validators.minLength(6), Validators.required])]
+      email: ['', Validators.compose([Validators.email, Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 

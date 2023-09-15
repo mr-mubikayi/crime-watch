@@ -16,6 +16,10 @@ import { ReportStatus } from 'src/app/models/enums/report-status';
 })
 export class ReportsPage implements OnInit {
 
+  skeletonItems = new Array(20);
+  content_loaded: boolean = false;
+  reports: any;
+
   constructor(
     private routerOutlet: IonRouterOutlet,
     private modalController: ModalController,
@@ -29,6 +33,17 @@ export class ReportsPage implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  ionViewDidEnter() {
+    this.getReports();
+  }
+
+  getReports(){
+    this.content_loaded = false;
+    setTimeout(() => {
+      this.content_loaded = true;
+    }, 1500);
   }
 
   getStatusColor(status: ReportStatus): string {

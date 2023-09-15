@@ -34,7 +34,8 @@ export class ReportPage implements OnInit {
 
   ngOnInit() {
     this.reportForm = this.formBuilder.group({
-      description: ['I was harassed at my work place', Validators.required]
+      description: ['I was harassed at my work place', Validators.required],
+      anonymous: [false, Validators.required]
     });
   }
 
@@ -57,10 +58,10 @@ export class ReportPage implements OnInit {
       await loading.present();
 
       const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const userName = this.reportForm.value.anonymous ? null : user.displayName;
       const date = new Date();
-
       const report: Report = {
-        user: user.displayName,
+        user: userName,
         date: date.toLocaleDateString(),
         time: date.toLocaleTimeString(),
         latitude: -29.1219,

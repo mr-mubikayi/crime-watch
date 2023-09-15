@@ -28,10 +28,10 @@ export class SignupPage implements OnInit {
   ngOnInit() {
 
     this.signupForm = this.formBuilder.group({
-      email: ['orpamubi30@gmail.com', Validators.compose([Validators.email, Validators.required])],
-      userName: ['Orpa', Validators.required],
-      password: ['123456', Validators.compose([Validators.minLength(6), Validators.required])],
-      passwordRepeat: ['123456', Validators.compose([Validators.minLength(6), Validators.required])]
+      email: ['', Validators.compose([Validators.email, Validators.required])],
+      userName: ['', Validators.required],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      passwordRepeat: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
 

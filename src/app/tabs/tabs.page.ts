@@ -1,4 +1,3 @@
-/* eslint-disable no-trailing-spaces */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController, LoadingController } from '@ionic/angular';
@@ -24,7 +23,6 @@ export class TabsPage {
     private router: Router,
     private reportService: ReportService) {}
 
-  // Select action
   async selectAction() {
 
     const actionSheet = await this.actionSheetController.create({
@@ -50,32 +48,22 @@ export class TabsPage {
 
             await loading.present();
 
-            const user = JSON.parse(localStorage.getItem('user') || '{}');
-            const date = new Date();
-
-            const report: Report = {
-              user: user.displayName,
-              date: date.toLocaleDateString(),
-              time: date.toLocaleTimeString(),
-              latitude: -29.1219,
-              longitude: 26.2039,
-              type: 'SOS',
-              description: 'Urgent',
-              status: 0,
-              severity: 1
-            };
-
-            this.reportService.createReport(report)
-
-            .then(() => {
-              this.toastService.presentToast('Success', 'Report sent successfully', 'top', 'success', 4000);
-              this.router.navigate(['/reports']);
-              loading.dismiss();
-            })
-            .catch((error) => {
-              this.toastService.presentToast('Error', `${error.message}`, 'top', 'danger', 4000);
-              loading.dismiss();
+            this.createReport(false, loading);
+          }
+        },
+        {
+          text: 'SOS Anonymous',
+          icon: 'alert-circle-outline',
+          handler: async () => {
+            const loading = await this.loadingController.create({
+              cssClass: 'default-loading',
+              message: 'Sending report...',
+              spinner: 'crescent'
             });
+
+            await loading.present();
+
+            this.createReport(true, loading);
           }
         },
         {
@@ -85,5 +73,34 @@ export class TabsPage {
         }]
     });
     await actionSheet.present();
+  }
+
+  createReport(isAnonymous: boolean, loading: HTMLIonLoadingElement){
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const userName = isAnonymous ? null : user.displayName;
+    const date = new Date();
+    const report: Report = {
+      user: userName,
+      date: date.toLocaleDateString(),
+      time: date.toLocaleTimeString(),
+      latitude: -29.1219,
+      longitude: 26.2039,
+      type: 'SOS',
+      description: 'Urgent',
+      status: 0,
+      severity: 1
+    };
+
+    this.reportService.createReport(report)
+    .then(() => {
+      this.toastService.presentToast('Success', 'Report sent successfully', 'top', 'success', 4000);
+      this.router.navigate(['/reports']);
+      loading.dismiss();
+    })
+    .catch((error) => {
+      this.toastService.presentToast('Error', `${error.message}`, 'top', 'danger', 4000);
+      loading.dismiss();
+    });
   }
 }

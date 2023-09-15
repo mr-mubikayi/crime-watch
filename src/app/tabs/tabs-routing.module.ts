@@ -21,10 +21,6 @@ const routes: Routes = [
         loadChildren: () => import('../pages/secure/insights/insights.module').then(m => m.InsightsPageModule)
       },
       {
-        path: 'payments',
-        loadChildren: () => import('../pages/secure/payments/payments.module').then(m => m.PaymentsPageModule)
-      },
-      {
         path: 'reports',
         loadChildren: () => import('../pages/secure/reports/reports.module').then(m => m.ReportsPageModule)
       },
@@ -33,8 +29,16 @@ const routes: Routes = [
         loadChildren: () => import('../pages/secure/report/report.module').then(m => m.ReportPageModule)
       },
       {
+        path: 'news',
+        loadChildren: () => import('../pages/secure/news/news.module').then(m => m.NewsPageModule)
+      },
+      {
         path: 'settings',
         loadChildren: () => import('../pages/secure/settings/settings.module').then(m => m.SettingsPageModule)
+      },
+      {
+        path: 'payments',
+        loadChildren: () => import('../pages/secure/payments/payments.module').then(m => m.PaymentsPageModule)
       },
     ]
   }

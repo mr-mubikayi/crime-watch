@@ -1,6 +1,9 @@
 <ion-header collapse="fade" [translucent]="true">
   <ion-toolbar>
-    <ion-title>report</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text="Home" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Report</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +24,11 @@
 
         <ion-item class="ion-margin-top-small">
           <ion-label color="tertiary" position="stacked">Description</ion-label>
-          <ion-textarea formControlName="description" type="text" autoGrow="true" rows="15" placeholder="Describe what happened"></ion-textarea>
+          <ion-textarea formControlName="description" type="text" autoGrow="true" rows="12" placeholder="Describe what happened"></ion-textarea>
+        </ion-item>
+
+        <ion-item class="ion-margin-top-small">
+          <ion-checkbox formControlName="anonymous" labelPlacement="end">Report as anonymous</ion-checkbox>
         </ion-item>
       </ion-list>
 

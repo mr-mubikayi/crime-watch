@@ -1,0 +1,33 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="News" defaultHref="/news"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      News Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">News Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <!-- Article -->
+    <ion-card class="ion-card-chart ion-no-margin animate__animated animate__fadeIn">
+      <img [src]="article.urlToImage" alt="Image" />
+
+      <ion-card-header>
+        <div>
+          <ion-card-title>{{ article.title }}</ion-card-title>
+          <ion-card-subtitle>{{ article.publishedAt | date:'MMMM dd, yyyy' }}</ion-card-subtitle>
+        </div>
+      </ion-card-header>
+      <ion-card-content [innerHTML]="article.content"></ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
