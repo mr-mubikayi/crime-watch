@@ -19,15 +19,15 @@
   <div class="ion-padding">
     <!-- Article -->
     <ion-card class="ion-card-chart ion-no-margin animate__animated animate__fadeIn">
-      <img [src]="article.urlToImage" alt="Image" />
+      <img [src]="article.banner_image" alt="Image" />
 
       <ion-card-header>
         <div>
           <ion-card-title>{{ article.title }}</ion-card-title>
-          <ion-card-subtitle>{{ article.publishedAt | date:'MMMM dd, yyyy' }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ article.time_published | date:'MMMM dd, yyyy' }}</ion-card-subtitle>
         </div>
       </ion-card-header>
-      <ion-card-content [innerHTML]="article.content"></ion-card-content>
+      <ion-card-content [innerHTML]="article.summary"></ion-card-content>
     </ion-card>
   </div>
 </ion-content>

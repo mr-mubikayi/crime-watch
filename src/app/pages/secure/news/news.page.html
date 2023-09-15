@@ -20,16 +20,16 @@
     <!-- Articles -->
     <ng-container *ngIf="content_loaded">
       <ion-card *ngFor="let article of articles" class="ion-card-chart ion-no-margin animate__animated animate__fadeIn">
-        <img [src]="article.urlToImage" alt="Image" />
+        <img [src]="article.banner_image" alt="Image" />
 
         <ion-card-header>
           <div>
             <ion-card-title>{{ article.title }}</ion-card-title>
-            <ion-card-subtitle>{{ article.publishedAt | date:'MMMM dd, yyyy' }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ article.time_published | date:'MMMM dd, yyyy' }}</ion-card-subtitle>
           </div>
         </ion-card-header>
         <ion-card-content>
-          {{ article.description }}
+          {{ article.summary }}
         </ion-card-content>
         <ion-button fill="clear" (click)="goToNewsDetails(article)">Read Article</ion-button>
       </ion-card>

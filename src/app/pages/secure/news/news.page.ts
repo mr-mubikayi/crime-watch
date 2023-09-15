@@ -12,7 +12,8 @@ export class NewsPage implements OnInit {
 
   content_loaded = false;
   skeletonItems = new Array(3);
-  articles: Article[];
+  // articles: Article[];
+  articles: any;
 
   constructor(
     private newsService: NewsService,
@@ -27,20 +28,30 @@ export class NewsPage implements OnInit {
   ionViewDidEnter() {
 
     this.content_loaded = false;
+    this.newsService.getNew().subscribe((x: any) => {
+      setTimeout(() => {
+        this.articles = x.feed;
+        this.content_loaded = true;
+      }, 2000);
 
-    this.newsService.getNews()
-    .then(value => {
-
-      if(value != null){
-        setTimeout(() => {
-          this.articles = value;
-          this.content_loaded = true;
-        }, 2000);
-      }
-
-    }).catch(error => {
+    },(error) => {
       this.content_loaded = true;
     });
+    // this.newsService.getNews()
+    // .then(value => {
+
+    //   if(value != null){
+    //     setTimeout(() => {
+    //       this.articles = value;
+    //       this.content_loaded = true;
+    //       this.newsService.getNew();
+    //     }, 2000);
+    //   }
+
+    // }).catch(error => {
+    //   this.newsService.getNew();
+    //   this.content_loaded = true;
+    // });
   }
 
   goToNewsDetails(article: Article){

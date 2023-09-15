@@ -9,7 +9,7 @@ export class NewsService {
 
   API_KEY = 'b7a871b4334645f8b02d6b9ee6262dae';
 
-  selectedArticle: Article;
+  selectedArticle: any;
 
   constructor(
     public http: HttpClient) {
@@ -42,5 +42,10 @@ export class NewsService {
         }
       );
     });
+  }
+
+  getNew(){
+    const url = 'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&apikey=GNQQN1DUTTPMX2VW'
+    return this.http.get(url);
   }
 }

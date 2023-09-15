@@ -10,16 +10,18 @@ import { NewsService } from 'src/app/services/news/news.service';
 })
 export class NewsDetailsPage implements OnInit {
 
-  article: Article = {
-    source: null,
-    author: '',
-    title: '',
-    description: '',
-    url: '',
-    urlToImage: '',
-    publishedAt: '',
-    content: '',
-  };
+  // article: Article = {
+  //   source: null,
+  //   author: '',
+  //   title: '',
+  //   description: '',
+  //   url: '',
+  //   urlToImage: '',
+  //   publishedAt: '',
+  //   content: '',
+  // };
+
+  article: any = {};
 
   constructor (
     private newsService: NewsService,
