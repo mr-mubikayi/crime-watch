@@ -18,12 +18,20 @@ export class SettingsPage implements OnInit {
     private loadingController: LoadingController,
     private toastService: ToastService) {
 
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      this.userName = user.displayName;
-      this.emailAddress = user.email;
+      this.getUser();
     }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.getUser();
+  }
+
+  getUser(){
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.userName = user.displayName;
+    this.emailAddress = user.email;
   }
 
   async onSignOutClicked() {
@@ -37,6 +45,7 @@ export class SettingsPage implements OnInit {
 
     this.authService.signOut()
     .then(() => {
+      localStorage.removeItem('user');
       this.toastService.presentToast('Success', 'Sign out successful', 'top', 'success', 4000);
       loading.dismiss();
     })

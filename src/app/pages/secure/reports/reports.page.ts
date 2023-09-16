@@ -44,6 +44,7 @@ export class ReportsPage implements OnInit {
   getReports(){
     this.content_loaded = false;
     setTimeout(() => {
+      this.reportService.getReports();
       this.content_loaded = true;
     }, 1500);
   }

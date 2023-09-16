@@ -52,11 +52,16 @@ export class SigninPage implements OnInit {
 
       this.authService
         .signIn(this.signinForm.value.email, this.signinForm.value.password)
-        .then((): any => {
+        .then((result): any => {
           if (this.authService.isEmailVerified) {
+            this.authService.userData = result.user;
+            localStorage.setItem('user', JSON.stringify(this.authService.userData));
+            JSON.parse(localStorage.getItem('user') || '{}');
             this.router.navigate(['/home']);
             loading.dismiss();
           } else {
+            localStorage.setItem('user', null || '{}');
+            JSON.parse(localStorage.getItem('user') || '{}');
             this.toastService.presentToast('Verification', 'Email is not verified, please check your email box', 'top', 'medium', 4000);
             loading.dismiss();
             return false;

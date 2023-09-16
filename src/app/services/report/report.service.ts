@@ -12,14 +12,18 @@ export class ReportService {
 
   constructor(
     private firestore: AngularFirestore) {
-      this.getReports();
   }
 
   getReports(){
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
     return this.firestore.collection('/reports/')
     .snapshotChanges()
     .subscribe(result => {
-      const reports = result.map(e => ({
+
+      const reports = result
+      .map(e => ({
         id: e.payload.doc.data()['id'],
         user: e.payload.doc.data()['user'],
         date: e.payload.doc.data()['date'],
@@ -30,8 +34,8 @@ export class ReportService {
         description: e.payload.doc.data()['description'],
         status: e.payload.doc.data()['status'],
         severity: e.payload.doc.data()['severity']
-        })
-      );
+        }))
+      .filter(report => report.user === user.displayName);
 
       const groupedReports = this.groupReportsByDate(reports);
       this.reportsGroupedByDate = groupedReports;
