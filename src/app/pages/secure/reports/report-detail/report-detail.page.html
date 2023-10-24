@@ -17,6 +17,38 @@
   </ion-header>
 
   <div class="ion-padding">
+    <ion-list id="update-list">
+      <div *ngFor="let statusTimeline of statusTimelines">
+          <ion-item>
+              <div class="chain-item">
+                  <div class="circle"></div>
+                  <div class="line"></div>
+              </div>
 
+              <ion-grid>
+                  <ion-row>
+                      <ion-col size="12">
+                          <ion-label>Date: {{ statusTimeline.date | date:'MMMM dd, yyyy' }}</ion-label>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size="12">
+                          <ion-label>Time: {{ statusTimeline.time }}</ion-label>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size="12">
+                          <ion-label>Status: {{ getStatusName(statusTimeline.statusDetail) }}</ion-label>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size="12">
+                          <ion-label class="wrap-text">Comments: {{ statusTimeline.description }}</ion-label>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+          </ion-item>
+      </div>
+    </ion-list>
   </div>
 </ion-content>

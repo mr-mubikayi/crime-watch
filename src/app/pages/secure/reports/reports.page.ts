@@ -1,5 +1,4 @@
 import { NavController } from '@ionic/angular';
-/* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, LoadingController, ModalController } from '@ionic/angular';
 import { FilterPage } from '../reports/filter/filter.page';
@@ -17,7 +16,7 @@ import { ReportStatus } from 'src/app/models/enums/report-status';
 })
 export class ReportsPage implements OnInit {
 
-  skeletonItems = new Array(3);
+  skeletonItems = new Array(10);
   content_loaded: boolean = false;
   reports: any;
 

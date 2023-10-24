@@ -21,7 +21,6 @@ export class ReportService {
     return this.firestore.collection('/reports/')
     .snapshotChanges()
     .subscribe(result => {
-
       const reports = result
       .map(e => ({
         id: e.payload.doc.data()['id'],
@@ -35,8 +34,7 @@ export class ReportService {
         status: e.payload.doc.data()['status'],
         severity: e.payload.doc.data()['severity']
         }))
-      .filter(report => report.user === user.displayName);
-
+      .filter(report => report.user  === user.displayName);
       const groupedReports = this.groupReportsByDate(reports);
       this.reportsGroupedByDate = groupedReports;
     });
@@ -47,7 +45,11 @@ export class ReportService {
 
     reports.forEach(report => {
       const reportDate = new Date(report.date);
-      const existingGroup = groupedReports.find(group => group.date.toDateString() === reportDate.toDateString());
+
+      // Get a string that represents year-month only
+      const yearMonth = `${reportDate.getFullYear()}-${reportDate.getMonth() + 1}`; // Note: getMonth() returns 0-based month
+      // Compare the year-month strings
+      const existingGroup = groupedReports.find(group => `${group.date.getFullYear()}-${group.date.getMonth() + 1}` === yearMonth);
 
       if (existingGroup) {
         existingGroup.reports.push(report);
@@ -56,6 +58,7 @@ export class ReportService {
         groupedReports.push(newGroup);
       }
     });
+
     groupedReports.sort((a, b) => b.date.getTime() - a.date.getTime());
     return groupedReports;
   }

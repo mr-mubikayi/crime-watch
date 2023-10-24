@@ -1,17 +1,9 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable prefer-const */
-/* eslint-disable no-bitwise */
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable no-var */
-/* eslint-disable object-shorthand */
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
-/* eslint-disable space-before-function-paren */
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Article } from 'src/app/models/interfaces/article';
 import { HelperService } from 'src/app/services/helper/helper.service';
+import { InsightsService } from 'src/app/services/insights/insights.service';
 
 @Component({
   selector: 'app-insights',
@@ -21,8 +13,9 @@ import { HelperService } from 'src/app/services/helper/helper.service';
 export class InsightsPage implements OnInit {
 
   articles: Article[];
-
   areaName: string;
+  data: any;
+  combinedData: any[]
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
@@ -116,13 +109,19 @@ export class InsightsPage implements OnInit {
   content_loaded: boolean = false;
 
   constructor(
-    private helperService: HelperService) {
+    private helperService: HelperService,
+    private insightService: InsightsService) {
   }
 
   ngOnInit() {
 
     // Create bar chart
     this.createBarChart();
+
+    this.insightService.getCityCrimeData().subscribe(response => {
+      this.data = response;
+      const combinedData = this.combineEntriesByYear(this.data);
+    });
   }
 
   ionViewDidEnter() {
@@ -169,4 +168,51 @@ export class InsightsPage implements OnInit {
       }
     ];
   }
+
+  combineEntriesByYear(data: any) {
+    const groupedByYear: { [key: number]: any[] } = {};
+
+    // Group entries by year
+    data.entries.forEach((entry: any) => {
+        if (!groupedByYear[entry.year]) {
+            groupedByYear[entry.year] = [];
+        }
+        groupedByYear[entry.year].push(entry);
+    });
+
+    const combinedEntries: any[] = [];
+
+    // Combine entries for each year
+    for (const year in groupedByYear) {
+        const entries = groupedByYear[year];
+        const combinedEntry = {
+            date: entries[0].date,
+            worried_attacked: 0,
+            year: parseInt(year),
+            level_of_crime: 0,
+            problem_property_crimes: 0,
+            safe_alone_night: 0,
+            worried_car_stolen: 0,
+            worried_home_broken: 0
+        };
+
+        entries.forEach((entry: any) => {
+            combinedEntry.worried_attacked += entry.worried_attacked;
+            combinedEntry.level_of_crime += entry.level_of_crime;
+            combinedEntry.worried_attacked += entry.worried_attacked;
+            combinedEntry.problem_property_crimes += entry.problem_property_crimes;
+            combinedEntry.safe_alone_night += entry.safe_alone_night;
+            combinedEntry.worried_car_stolen += entry.worried_car_stolen;
+            combinedEntry.worried_home_broken += entry.worried_home_broken;
+        });
+
+        combinedEntries.push(combinedEntry);
+    }
+
+    return {
+        entries: combinedEntries,
+        name: data.name,
+        city_id: data.city_id
+    };
+}
 }

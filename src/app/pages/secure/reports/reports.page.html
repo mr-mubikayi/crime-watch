@@ -39,7 +39,7 @@
                 <h3>{{ report.type }}</h3>
                 <p>{{ report.date | date:'MMMM dd, yyyy' }} - {{ report.time }}</p>
               </ion-label>
-              <ion-badge [color]="getStatusColor(report.status)" mode="ios" slot="end">{{ getStatusName(report.status) }}</ion-badge>
+              <ion-badge [color]="getStatusColor(report.status.currentStatus)" mode="ios" slot="end">{{ getStatusName(report.status.currentStatus) }}</ion-badge>
             </ion-item>
           </ng-container>
         </ion-list>

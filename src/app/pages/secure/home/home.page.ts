@@ -117,7 +117,6 @@ export class HomePage implements OnInit, OnDestroy {
   private manageMarker(event: any): void {
     const summary = this.markers.filter((item: any) => {
       if (item.markerId === event.markerId) {
-        console.log(item);
         return item;
       }
     });

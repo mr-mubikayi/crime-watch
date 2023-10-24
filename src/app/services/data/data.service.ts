@@ -7,17 +7,17 @@ export class DataService {
 
   public locations: Array<Location> = [
     {
-      country: 'Bloemfontein',
-      lat: -29.1183,
-      lng: 26.2249,
+      country: 'Cities',
+      lat: -28.4541,
+      lng: 26.7968,
       description: `Indonesia, officially the Republic of Indonesia, is a country in Southeast Asia and Oceania
                     between the Indian and Pacific oceans. It consists of over 17,000 islands, including Sumatra,
                     Java, Sulawesi, and parts of Borneo and New Guinea`,
       locations: [
         {
-          name: 'Westdene',
-          lat: -29.106101,
-          lng: 26.208312,
+          name: 'Bloemfontein',
+          lat: -29.1183,
+          lng: 26.2249,
           description: `Jakarta, Indonesia's massive capital, sits on the northwest coast of the island of Java.
                         A historic mix of cultures – Javanese, Malay, Chinese, Arab, Indian and European – has
                         influenced its architecture, language and cuisine. The old town, Kota Tua, is home to Dutch
@@ -25,44 +25,19 @@ export class DataService {
                         traditional wooden schooners dock.`
         },
         {
-          name: 'Willows',
-          lat: -29.1219,
-          lng: 26.2039,
-          description: `Bandung, capital of Indonesia’s West Java province, is a large city set amid volcanoes and
-                        tea plantations. It's known for colonial and art deco architecture, a lively, university-town
-                        feel and – thanks to its 768m elevation – relatively cool tropical weather. Bandung is also a
-                        shopping destination, with fashion outlets clustered along Jalan Setiabudi and Jalan Riau in
-                        the Dago district.`
+          name: 'Welkom',
+          lat: -27.9761,
+          lng: 26.7345,
+          description: `Jakarta, Indonesia's massive capital, sits on the northwest coast of the island of Java.
+                        A historic mix of cultures – Javanese, Malay, Chinese, Arab, Indian and European – has
+                        influenced its architecture, language and cuisine. The old town, Kota Tua, is home to Dutch
+                        colonial buildings, Glodok (Jakarta’s Chinatown) and the old port of Sunda Kelapa, where
+                        traditional wooden schooners dock.`
         },
-        {
-          name: 'Brandwag',
-          lat: -29.1032,
-          lng: 26.1965,
-          description: `Yogyakarta (often called “Jogja”) is a city on the Indonesian island of Java known for its traditional
-                        arts and cultural heritage. Its ornate 18th-century royal complex, or kraton, encompasses the still-inhabited
-                        Sultan’s Palace. Also within the kraton are numerous open-air pavilions that host classical Javanese dance shows
-                        and concerts of gamelan music, characterized by gongs, chimes and plucked string instruments.`
-        },
-        {
-          name: 'Universitas',
-          lat: -29.1173,
-          lng: 26.1743,
-          description: `Semarang is the capital and largest city of Central Java province in Indonesia. It was a major port during the
-                        Dutch colonial era, and is still an important regional center and port today.`
-        },
-        {
-          name: 'Bayswater',
-          lat: -29.0821,
-          lng: 26.2393,
-          description: `Surabaya is a port city on the Indonesian island of Java. A vibrant, sprawling metropolis, it mixes modern
-                        skyscrapers with canals and buildings from its Dutch colonial past. It has a thriving Chinatown and an Arab
-                        Quarter whose Ampel Mosque dates to the 15th century. The Tugu Pahlawan (Heroes Monument) honors the independence
-                        battles waged in Surabaya’s streets in 1945.`
-        }
       ]
     },
     {
-      country: 'Welkom',
+      country: 'Police Stations',
       lat: -27.9761,
       lng: 26.7345,
       description: `Malaysia is a Southeast Asian country occupying parts of the Malay Peninsula and the island of Borneo.

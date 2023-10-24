@@ -70,7 +70,18 @@ export class ReportPage implements OnInit {
         longitude: 26.2039,
         type: this.selectedType,
         description: this.reportForm.value.description,
-        status: 0,
+        status: {
+          currentStatus: 0,
+          statusTimelines:
+          [
+            {
+            date: date.toLocaleDateString(),
+            description: "",
+            statusDetail: 0,
+            time: date.toLocaleTimeString(),
+            }
+          ],
+        },
         severity: 0
       };
 

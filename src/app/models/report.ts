@@ -1,3 +1,5 @@
+import { ReportStatus } from "./report-status";
+
 export class Report {
   id: string;
   user: string;
@@ -7,6 +9,6 @@ export class Report {
   longitude: number;
   type: string;
   description?: string;
-  status?: number;
+  status?: ReportStatus;
   severity?: number;
 }

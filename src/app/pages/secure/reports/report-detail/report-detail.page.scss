@@ -1,0 +1,30 @@
+.chain-item {
+  display: flex;
+  align-items: center;
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #b2c3ff;
+    margin-right: 15px;
+    position: relative;
+    top: -55px;
+  }
+
+  .line {
+    width: 2px;
+    height: 130px;
+    background-color: #b2c3ff;
+    position: absolute;
+    left: 9px;
+    top: 22px;
+  }
+}
+
+ion-label {
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+}
+
+

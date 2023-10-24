@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { ReportDetailPage } from './report-detail.page';
     IonicModule,
     ReportDetailPageRoutingModule
   ],
-  declarations: [ReportDetailPage]
+  declarations: [ReportDetailPage],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class ReportDetailPageModule {}
